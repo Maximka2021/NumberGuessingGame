@@ -1,7 +1,8 @@
+package package1;
 import java.util.Random;
 import java.util.Scanner;
 
-public class App {
+public class Main {
 	public static void main(String[] args) {
 		System.out.print("To start the game press s or S" + "\n");
 		Scanner scanner = new Scanner(System.in);
@@ -15,18 +16,24 @@ public class App {
 		
 	}
 	static String startGame() {
-		System.out.print("Welocme to the Number Guessing Game" + "\n" + "You should guess number between 1 and 5" + "\n");
+		System.out.print("Welocme to the Number Guessing Game" + "\n" + "You should guess number between 1 and 5" + "\n" + "You have 3 attempts" + "\n");
+		int attempts = 3;
 		Scanner scanner = new Scanner(System.in);
 		int numResponse = scanner.nextInt();
 		int rndNum = newNumber();
 		System.out.print("random => " + rndNum + "\n");
-		if(checkNumbers(numResponse, rndNum)) {
-			System.out.print("You Won" + "\n");
-			endGame();
-		}else {
-			System.out.print("You Lose" + "\n");
-			endGame();
-		}
+			while(attempts > 1) {
+				if(checkNumbers(numResponse, rndNum)) {
+					System.out.print("You win!!!" + "\n");
+					endGame();
+					break;
+				}else {
+					attempts--;
+					System.out.print("Wrong, you have " + attempts + " attempts left");
+					numResponse = scanner.nextInt();
+				}
+			}
+		endGame();
 		scanner.close();
 		return null;
 	}
