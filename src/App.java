@@ -17,21 +17,22 @@ public class Main {
 	}
 	static String startGame() {
 		System.out.print("Welocme to the Number Guessing Game" + "\n" + "You should guess number between 1 and 5" + "\n" + "You have 3 attempts" + "\n");
+		int score = 100;
 		int attempts = 3;
+		int rndNum = newNumber();
 		Scanner scanner = new Scanner(System.in);
 		int numResponse = scanner.nextInt();
-		int rndNum = newNumber();
-		System.out.print("random => " + rndNum + "\n");
-			while(attempts > 1) {
-				if(checkNumbers(numResponse, rndNum)) {
-					System.out.print("You win!!!" + "\n");
-					endGame();
+			while(numResponse != rndNum) {
+				if(attempts == 1) {
+					System.out.print("You are out of attempts Loser" + "\n");
 					break;
-				}else {
-					attempts--;
-					System.out.print("Wrong, you have " + attempts + " attempts left");
-					numResponse = scanner.nextInt();
 				}
+				attempts--;
+				System.out.print("Wrong, you have " + attempts + " left" + "\n");
+				numResponse = scanner.nextInt();
+			}
+			if(numResponse == rndNum) {
+				System.out.print("You Win" + "\n" + "Score: " + (score * attempts) + "\n");
 			}
 		endGame();
 		scanner.close();
@@ -49,10 +50,4 @@ public class Main {
 		return null;
 	}
 	
-	static boolean checkNumbers(int userNum, int num) {
-		if(userNum == num) {
-			return true;
-		}
-		return false;
-	}
 }
